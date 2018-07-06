@@ -16,7 +16,7 @@ php-skeleton uses [Semantic Versioning](http://semver.org)
 ## Installation
 
 ```bash
-$ composer create-project petk/php-skeleton ./project 'dev-master'
+$ composer create-project emjones/php-docker-compose-skeleton ./project 'dev-master'
 ```
 
 ## Usage
@@ -24,9 +24,9 @@ $ composer create-project petk/php-skeleton ./project 'dev-master'
 ```php
 <?php
 include vendor
-use Petk\Skeleton;
+use Agravic\App;
 
-$skeleton = new Skeleton();
+$skeleton = new App();
 ```
 
 Read also the [documentation](docs/index.md) for more information how to use php-skeleton.

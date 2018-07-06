@@ -9,16 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Petk\Skeleton;
+namespace Agravic\Package;
 
-use Petk\Skeleton\Skeleton;
 
-class SkeletonTest extends \PHPUnit_Framework_TestCase
+class AppTest extends \PHPUnit_Framework_TestCase
 {
+  /**
+   * @Test
+   */
     public function testCanBeNegated()
     {
         // Arrange
-        $a = new Skeleton(1);
+        $a = new App(1);
 
         // Act
         $b = $a->negate();

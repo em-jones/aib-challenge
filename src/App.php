@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Petk\Skeleton;
+namespace Agravic\Package;
 
 /**
  * Class Skeleton
  *
  */
-class Skeleton
+class App
 {
     private $amount;
 
@@ -31,6 +31,6 @@ class Skeleton
 
     public function negate()
     {
-        return new Skeleton(-1 * $this->amount);
+        return new App(-1 * $this->amount);
     }
 }
