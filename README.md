@@ -1,4 +1,4 @@
-# All Inbox Code Challenge
+# Code Challenge
 
 These instructions were tested using docker-ce 18.03. If you wish to use your host environment to run the scripts, all of the Dockerfile RUN/CMD commands can be done in your environment - relying on php7.2 & node.js 10
 
