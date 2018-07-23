@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": ["node", "jest", "reflect-metadata"],
+    "paths": {
+      "@/*": ["components/*"]
+    },
+    "lib": ["es2017", "dom", "scripthost"]
+  },
+  "include": ["./**/*.ts", "./**/*.vue", "./*.md", "./theme/**/*.vue"],
+  "exclude": ["../../node_modules"]
+}

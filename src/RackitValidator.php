@@ -9,7 +9,33 @@
 namespace Agravic\AIB;
 
 
-class RackitValidator
-{
 
+class RackitValidator implements Validator
+{
+  /**
+   * @var \Rakit\Validation\Validator
+   */
+  private $validator;
+
+  /**
+   * RackitValidator constructor.
+   */
+  public function __construct()
+  {
+    $this->validator = new \Rakit\Validation\Validator();
+  }
+
+  /**
+   * @param Validatable $validatable
+   * @return bool
+   */
+  function validate(Validatable $validatable): bool{
+    $input = ['email' => $validatable->getValue()];
+    $validator = $this->validator->make($input, [
+      'email' => 'email'
+    ]);
+    $validator->validate();
+    $isValid = $validator->passes();
+    return $isValid;
+  }
 }

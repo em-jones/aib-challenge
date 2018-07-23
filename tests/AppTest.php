@@ -1,31 +1,113 @@
 <?php
+namespace Agravic\AIB;
+require __DIR__ . '/../vendor/autoload.php';
 
-/*
- * This file is part of the php-skeleton package.
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Finder\Finder;
+
+/**
+ * Class AppTest
+ * @package Agravic\AIB
  *
- * (c) Peter Kokot <peterkokot@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * The tests currently load a list of email values specified to be valid, or invalid and of difficult to validate natures.
+ * These tests are functional for the sake of evaluating which of the chosen libraries will work well for our purposes.
  */
-
-namespace Agravic\Package;
-
-
-class AppTest extends \PHPUnit_Framework_TestCase
+class AppTest extends TestCase
 {
   /**
-   * @Test
+   * @var Finder
    */
-    public function testCanBeNegated()
-    {
-        // Arrange
-        $a = new App(1);
+  private $finder;
+  /**
+   * @var array
+   */
+  private $validValues;
 
-        // Act
-        $b = $a->negate();
+  /**
+   * @var array
+   */
+  private $trickyValidValues;
 
-        // Assert
-        $this->assertEquals(-1, $b->getAmount());
+  /**
+   * @var array
+   */
+  private $invalidValues;
+
+  /**
+   * @var array
+   */
+  private $trickyInvalidValues;
+
+  /**
+   * @before
+   */
+  public function before(){
+    $this->finder = new Finder();
+    $this->finder->files()->in(TEST_RESOURCES_DIR)->name('emails.json');
+    foreach($this->finder as $file){
+      $emailHashMap = json_decode($file->getContents());
+      $this->validValues = $emailHashMap->valid;
+      $this->invalidValues = $emailHashMap->invalid;
+      $this->trickyInvalidValues = $emailHashMap->strangeInvalid;
+      $this->trickyValidValues = $emailHashMap->strangeValid;
     }
+  }
+
+  /**
+   * @test
+   */
+  public function testBaseline() {
+    $start = microtime(true);
+    $validator = ValidatorFactory::validatorFactory()->baselineValidator();
+    $this->go($start, $validator, PhpValidator::class);
+  }
+
+  /**
+   * @test
+   */
+  public function testRespect() {
+    $start = microtime(true);
+    $validator = ValidatorFactory::validatorFactory()->respectValidator();
+    $this->go($start, $validator, RespectValidator::class);
+  }
+
+  /**
+   * @test
+   */
+  public function testValitron() {
+    $start = microtime(true);
+    $validator = ValidatorFactory::validatorFactory()->valitronValidator();
+    $this->go($start, $validator, ValitronValidator::class);
+  }
+
+
+  /**
+   * @test
+   */
+  public function testRackit() {
+    $start = microtime(true);
+    $validator = ValidatorFactory::validatorFactory()->rackitValidator();
+    $this->go($start, $validator, RackitValidator::class);
+  }
+
+  private function go(float $start, Validator $validator, string $validatorClassName){
+    $isValid = function (string $value) use ($validator) {
+      /** @var EmailAddress $emailAddress */
+      return (new EmailAddress($value))->getValid(RespectValidator::class);
+    };
+    $validResults = array_filter($this->validValues, $isValid);
+    $trickyValidResults = array_filter($this->trickyValidValues, $isValid);
+    $invalidResults = array_filter($this->invalidValues, $isValid);
+    $trickyInvalidResults = array_filter($this->trickyInvalidValues, $isValid);
+    $time_elapsed_secs = microtime(true) - $start;
+
+    $results = sprintf("------%s------\nValid: %d\nTrickyValid: %d\nInvalid: %d\nTrickyInvalid: %d\n\nTime: %f\n",
+      $validatorClassName,
+      count($validResults),
+      count($invalidResults),
+      count($trickyValidResults),
+      count($trickyInvalidResults),
+      $time_elapsed_secs);
+    var_dump($results);
+  }
 }

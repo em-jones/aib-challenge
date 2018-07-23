@@ -9,7 +9,7 @@
 namespace Agravic\AIB;
 
 
-class NoValueException
+class NoValueException extends \Exception
 {
 
 }

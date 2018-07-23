@@ -9,7 +9,15 @@
 namespace Agravic\AIB;
 
 
-class PhpValidator
+/**
+ * Class PhpValidator
+ * @package Agravic\AIB
+ */
+class PhpValidator implements Validator
 {
 
+  function validate(Validatable $validatable)
+  {
+    return filter_var($validatable->getValue(), FILTER_VALIDATE_EMAIL) ? true : false;
+  }
 }

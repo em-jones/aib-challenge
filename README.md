@@ -1,35 +1,37 @@
-# Skeleton
+# All Inbox Code Challenge
 
-[![Build Status](https://secure.travis-ci.org/petk/php-skeleton.png?branch=master)](http://travis-ci.org/petk/php-skeleton)
+These instructions were tested using docker-ce 18.03. If you wish to use your host environment to run the scripts, all of the Dockerfile RUN/CMD commands can be done in your environment - relying on php7.2 & node.js 10
 
-Creating PSR-4 compliant PHP package or library with Composer the easy way. This package provides you with
-most of the files and common folder structure that are used for creating PSR-4 compliant, modern PHP
-package/library.
+#### Issues
+While the various solutions offered in this library offer parity of accuracy to the various validation libraries selected for testing, all of the solutions currently do not accurately validate all values based on the post they were pulled from - http://codefool.tumblr.com/post/15288874550/list-of-valid-and-invalid-email-addresses
 
-There is no recommended or standard folder and files structure for PHP packages but there are good practices.
-This repository provides initial skeleton for your PHP libraries and packages.
-
-Inspired by [phpleague/skeleton](https://github.com/thephpleague/skeleton) and [php.skeleton](https://github.com/koriym/PHP.Skeleton).
-
-php-skeleton uses [Semantic Versioning](http://semver.org)
-
-## Installation
-
+ #### Initialize application - install dependencies, run tests, and start solution documentation server
 ```bash
-$ composer create-project emjones/php-docker-compose-skeleton ./project 'dev-master'
+$ docker-compose up
 ```
 
-## Usage
+Once this command has executed you should be able to see the test results and access the problem's analysis and approach 
+here: http://localhost:8080/posts/em-looks-for-a-job.html  - NOTE: if you use docker toolbox for windows it's likely you're not going to be pointing to localhost, but instead will be accessing your docker via a locally available ip - 192.168.99.100 for example
 
-```php
-<?php
-include vendor
-use Agravic\App;
+### /tests
+There's currently only a handful of tests and they're built to evaluate the speed and efficacy of the various libraries' email validation.
 
-$skeleton = new App();
+### /src
+The source code for the solution
+
+### /codechallenge
+The assets for the hosted documentation
+
+### /bin
+The code generator/script and the composer installer script
+
+#### Test playground
+Using the App.php script located at src/App.php, run the script passing an argument to test its validity.
+
+Eg:
+```bash
+$ php src/App.php testemail@gmail.com
 ```
-
-Read also the [documentation](docs/index.md) for more information how to use php-skeleton.
 
 ## License
 

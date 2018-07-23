@@ -4,3 +4,9 @@ services:
     build: .
     volumes:
       - "./:/usr/src/app"
+  challenge:
+    build: ./codechallenge
+    volumes:
+      - "./codechallenge:/usr/src/app"
+    ports:
+      - 8080:8080

@@ -1,0 +1,7 @@
+---
+sidebar: false
+---
+
+# Archive
+
+<Archive />

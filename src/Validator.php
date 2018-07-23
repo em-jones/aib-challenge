@@ -9,7 +9,8 @@
 namespace Agravic\AIB;
 
 
+
 interface Validator
 {
-
+  function validate(Validatable $validatable);
 }

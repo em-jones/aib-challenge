@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Petk\Installer;
+namespace Agravic;
 
 use Composer\Script\Event;
 
@@ -21,18 +21,16 @@ class Installer
 {
     public static function postUpdate(Event $event)
     {
-        $composer = $event->getComposer();
-        // do stuff
+//        $composer = $event->getComposer();
     }
 
     public static function postPackageInstall(Event $event)
     {
-        $installedPackage = $event->getOperation()->getPackage();
-        // do stuff
+//        $installedPackage = $event->getOperation()->getPackage();
     }
 
     public static function warmCache(Event $event)
     {
-        // make cache toasty
+
     }
 }

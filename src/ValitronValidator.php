@@ -9,11 +9,15 @@
 namespace Agravic\AIB;
 
 
-
-class RackitValidator implements Validator
+/**
+ * Class ValitronValidator
+ *
+ * @package Agravic\AIB
+ */
+class ValitronValidator implements Validator
 {
   /**
-   * @var \Rakit\Validation\Validator
+   * @var \Valitron\Validator
    */
   private $validator;
 
@@ -22,20 +26,19 @@ class RackitValidator implements Validator
    */
   public function __construct()
   {
-    $this->validator = new \Rakit\Validation\Validator();
+    $this->validator = new \Valitron\Validator();
   }
 
   /**
    * @param Validatable $validatable
+   * @return bool
    */
   function validate(Validatable $validatable)
   {
-    $input = ['email' => $validatable->getValue()];
-    $validator = $this->validator->make($input, [
-      'email' => 'email'
-    ]);
-    $validator->validate();
-    $isValid = $validator->passes();
-    $validatable->setValid($isValid);
+    $validator = $this->validator->withData(['email' => $validatable->getValue()]);
+    $validator->rule('email', 'email');
+    $validator->rule('required', ['email']);
+    $isValid = $validator->validate();
+    return $isValid;
   }
 }

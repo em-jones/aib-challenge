@@ -12,15 +12,25 @@
 namespace Agravic\AIB;
 
 /**
- * Class Skeleton
- *
+ * Class EmailAddress
+ * @package Agravic\AIB
  */
-class EmailAddress implements Validateable
+class EmailAddress implements Validatable
 {
   /**
    * @var string
    */
-    private $value;
+  private $value;
+
+  /**
+   * @var bool
+   */
+  private $isValid;
+
+  /**
+   * @var Validator
+   */
+  private $validator;
 
   /**
    * EmailAddress constructor.
@@ -31,12 +41,39 @@ class EmailAddress implements Validateable
     $this->value = $value;
   }
 
+  /**
+   * @param string|null $validatorType
+   * @throws NoValueException
+   * @return bool
+   */
+  public function getValid(string $validatorType = null): bool
+  {
+    if($this->value === null) {
+      throw new NoValueException();
+    }
+    switch ($validatorType) {
+      case RackitValidator::class:
+        $this->validator = ValidatorFactory::validatorFactory()->respectValidator();
+        break;
+      case RespectValidator::class;
+        $this->validator = ValidatorFactory::validatorFactory()->respectValidator();
+        break;
+      case ValitronValidator::class;
+        $this->validator = ValidatorFactory::validatorFactory()->respectValidator();
+        break;
+      default:
+        //most performant based on current tests
+        $this->validator = ValidatorFactory::validatorFactory()->respectValidator();
+        break;
+    }
+    return $this->validator->validate($this);
+  }
 
   /**
-   * @return boolean
+   * @return string
    */
-  function isValid()
+  public function getValue(): string
   {
-    return $this
+    return $this->value;
   }
 }
