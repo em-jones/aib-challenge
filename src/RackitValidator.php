@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: dev
- * Date: 7/9/18
- * Time: 5:36 PM
+ * Date: 7/7/18
+ * Time: 2:41 PM
  */
 
 namespace Agravic\AIB;
 
 
-class App
+class RackitValidator
 {
 
 }

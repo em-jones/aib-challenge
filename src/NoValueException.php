@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: dev
  * Date: 7/9/18
- * Time: 5:36 PM
+ * Time: 12:34 PM
  */
 
 namespace Agravic\AIB;
 
 
-class App
+class NoValueException
 {
 
 }
