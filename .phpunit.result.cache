@@ -1,1 +1,0 @@
-C:30:"PHPUnit\Runner\TestResultCache":245:{a:2:{s:7:"defects";a:4:{s:12:"testBaseline";i:5;s:11:"testRespect";i:5;s:12:"testValitron";i:5;s:10:"testRackit";i:5;}s:5:"times";a:4:{s:12:"testBaseline";d:0.111;s:11:"testRespect";d:0.007;s:12:"testValitron";d:0.02;s:10:"testRackit";d:0.123;}}}
